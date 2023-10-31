@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:58:26 by mmasarov          #+#    #+#             */
-/*   Updated: 2023/10/31 10:45:05 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/31 10:47:13 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,3 @@ void	free_file(t_list *file);
 int		ft_strlen(const char *str);
 
 #endif
-
-
-
