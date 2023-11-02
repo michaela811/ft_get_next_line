@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:57:30 by mmasarov          #+#    #+#             */
-/*   Updated: 2023/11/02 15:28:20 by codespace        ###   ########.fr       */
+/*   Updated: 2023/11/02 17:26:57 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*get_next_line(int fd)
 {
-	static t_list	*file = NULL;
+	static t_list	*file;
 	char			*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (free_file(&file), NULL);
 	line = NULL;
 	read_and_stash(fd, &file);
@@ -97,11 +97,13 @@ void	ft_clean_file(t_list **file)
 	int		i;
 	int		j;
 
+	if (file == NULL)
+		return ;
 	i = 0;
 	j = 0;
 	clean_node = malloc(sizeof(t_list));
-	if (file == NULL || clean_node == NULL)
-		return ;
+	if (clean_node == NULL)
+		return (free_file(file));
 	clean_node -> next = NULL;
 	last = ft_get_last(*file);
 	while (last -> content[i] && last -> content[i] != '\n')
@@ -111,13 +113,12 @@ void	ft_clean_file(t_list **file)
 	clean_node -> content = malloc(sizeof(char) * ((ft_strlen(last -> content)
 					- i) + 1));
 	if (clean_node -> content == NULL)
-		return (free(clean_node), free_file(file)); //
+		return (free(clean_node), free_file(file));
 	while (last -> content[i])
 		clean_node -> content[j++] = last -> content[i++];
 	clean_node -> content[j] = '\0';
 	free_file(file);
 	*file = clean_node;
-	clean_node = NULL;
 }
 
 void	free_file(t_list **file)
