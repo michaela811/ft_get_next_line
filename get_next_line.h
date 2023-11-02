@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:58:26 by mmasarov          #+#    #+#             */
-/*   Updated: 2023/10/31 10:47:13 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/31 13:29:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	add_to_file(t_list **file, char *buffer, int was_read);
 void	ft_extract_line(t_list *file, char **line);
 void	ft_malloc_line(char **line, t_list *file);
 void	ft_clean_file(t_list **file);
-void	free_file(t_list *file);
+void	free_file(t_list **file);
 int		ft_strlen(const char *str);
 
 #endif

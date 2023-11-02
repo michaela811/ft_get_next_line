@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:58:14 by mmasarov          #+#    #+#             */
-/*   Updated: 2023/10/31 10:44:50 by codespace        ###   ########.fr       */
+/*   Updated: 2023/11/02 13:51:05 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	add_to_file(t_list **file, char *buffer, int was_read)
 	new_node -> next = NULL;
 	new_node -> content = malloc(sizeof(char) * (was_read + 1));
 	if (new_node -> content == NULL)
-		return ;
+		return (free(new_node), free_file(file)); //
 	i = 0;
 	while (buffer[i] && i < was_read)
 	{
@@ -90,6 +90,7 @@ void	add_to_file(t_list **file, char *buffer, int was_read)
 	}
 	last = ft_get_last(*file);
 	last -> next = new_node;
+	new_node = NULL;
 }
 
 int	ft_strlen(const char *str)

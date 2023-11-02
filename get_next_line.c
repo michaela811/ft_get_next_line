@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:57:30 by mmasarov          #+#    #+#             */
-/*   Updated: 2023/10/31 10:44:23 by codespace        ###   ########.fr       */
+/*   Updated: 2023/11/02 15:28:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,19 @@ char	*get_next_line(int fd)
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
-		return (NULL);
+		return (free_file(&file), NULL);
 	line = NULL;
 	read_and_stash(fd, &file);
 	if (file == NULL)
 		return (NULL);
 	ft_extract_line(file, &line);
 	ft_clean_file(&file);
-	if (line[0] == '\0')
+	if (line == NULL || line[0] == '\0')
 	{
-		free_file(file);
+		if (line)
+			free (line);
+		free_file(&file);
 		file = NULL;
-		free(line);
 		return (NULL);
 	}
 	return (line);
@@ -110,20 +111,21 @@ void	ft_clean_file(t_list **file)
 	clean_node -> content = malloc(sizeof(char) * ((ft_strlen(last -> content)
 					- i) + 1));
 	if (clean_node -> content == NULL)
-		return ;
+		return (free(clean_node), free_file(file)); //
 	while (last -> content[i])
 		clean_node -> content[j++] = last -> content[i++];
 	clean_node -> content[j] = '\0';
-	free_file(*file);
+	free_file(file);
 	*file = clean_node;
+	clean_node = NULL;
 }
 
-void	free_file(t_list *file)
+void	free_file(t_list **file)
 {
 	t_list	*current;
 	t_list	*next;
 
-	current = file;
+	current = *file;
 	while (current)
 	{
 		free(current -> content);
@@ -131,4 +133,5 @@ void	free_file(t_list *file)
 		free(current);
 		current = next;
 	}
+	*file = NULL;
 }
