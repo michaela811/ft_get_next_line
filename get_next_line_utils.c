@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:58:14 by mmasarov          #+#    #+#             */
-/*   Updated: 2023/11/02 13:51:05 by codespace        ###   ########.fr       */
+/*   Updated: 2023/11/02 18:07:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,10 @@ void	read_and_stash(int fd, t_list **file)
 	{
 		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (buffer == NULL)
-			return ;
+			return (free_file(file));
 		was_read = (int)read(fd, buffer, BUFFER_SIZE);
 		if ((*file == NULL && was_read == 0) || was_read == -1)
-		{
-			free(buffer);
-			return ;
-		}
+			return (free(buffer), free_file(file));
 		buffer[was_read] = '\0';
 		add_to_file(file, buffer, was_read);
 		free(buffer);
@@ -71,11 +68,11 @@ void	add_to_file(t_list **file, char *buffer, int was_read)
 
 	new_node = malloc(sizeof(t_list));
 	if (new_node == NULL)
-		return ;
+		return (free_file(file));
 	new_node -> next = NULL;
 	new_node -> content = malloc(sizeof(char) * (was_read + 1));
 	if (new_node -> content == NULL)
-		return (free(new_node), free_file(file)); //
+		return (free(new_node), free_file(file));
 	i = 0;
 	while (buffer[i] && i < was_read)
 	{
@@ -90,7 +87,6 @@ void	add_to_file(t_list **file, char *buffer, int was_read)
 	}
 	last = ft_get_last(*file);
 	last -> next = new_node;
-	new_node = NULL;
 }
 
 int	ft_strlen(const char *str)
