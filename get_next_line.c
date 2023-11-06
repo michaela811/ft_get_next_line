@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:57:30 by mmasarov          #+#    #+#             */
-/*   Updated: 2023/11/02 19:58:29 by codespace        ###   ########.fr       */
+/*   Updated: 2023/11/02 20:50:37 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ void	ft_clean_file(t_list **file)
 
 	j = 0;
 	i = 0;
-	if (file == NULL)
-		return ;
 	clean_node = malloc(sizeof(t_list));
 	if (clean_node == NULL)
 		return (free_file(file));
@@ -111,7 +109,7 @@ void	ft_clean_file(t_list **file)
 	if (last -> content && last -> content[i] == '\n')
 		i++;
 	clean_node -> content = malloc(sizeof(char) * ((ft_strlen(last -> content)
-					- i) + 1));
+				- i) + 1));
 	if (clean_node -> content == NULL)
 		return (free(clean_node), free_file(file));
 	while (last -> content[i])
@@ -136,3 +134,4 @@ void	free_file(t_list **file)
 	}
 	*file = NULL;
 }
+
