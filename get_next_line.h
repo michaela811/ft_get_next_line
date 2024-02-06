@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mmasarov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 11:58:26 by mmasarov          #+#    #+#             */
-/*   Updated: 2023/12/03 21:07:46 by codespace        ###   ########.fr       */
+/*   Created: 2023/11/06 10:31:42 by mmasarov          #+#    #+#             */
+/*   Updated: 2023/11/06 10:31:49 by mmasarov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <string.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -42,9 +41,5 @@ void	ft_malloc_line(char **line, t_list *file);
 void	ft_clean_file(t_list **file);
 void	free_file(t_list **file);
 int		ft_strlen(const char *str);
-char get_last(char *line);
-char get_first(char *line);
-int get_cubes(char *line);
-int get_number(char *line);
 
 #endif
